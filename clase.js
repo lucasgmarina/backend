@@ -24,6 +24,11 @@ class contenedor{
          try{
 const leer= await fs.readFile(this.path,"utf-8")
 const data= JSON.parse(leer)
+const obj= data.find(obj=>obj.id ===id)
+if(!obj){
+    return null
+}
+return obj 
     }catch(e){
             console.log(e)
          }
@@ -33,6 +38,13 @@ const leer= await fs.readFile(this.path,"utf-8")
 const data= JSON.parse(leer)
     }
     deleteById (){
+        try {
+           const productos = await this.getAll ();
+           const producto = productos.find((producto) => producto.id === id);
+           return producto;
+          } catch (error) {
+            console.log(error);
+          }
 
     }
     deleteAll(){
